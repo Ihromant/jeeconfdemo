@@ -16,6 +16,9 @@ public class WriterUtil {
     public static void writeHistory(List<HistoryItem> history, QTable qTable, int episode) {
         if (history.stream().noneMatch(HistoryItem::isRandom)) {
             Player winner = history.get(history.size() - 1).getTo().getUtility(Player.X) == 1.0 ? Player.X : Player.O;
+            if (winner != Player.O) {
+                writeHistory(history, qTable);
+            }
             statistics.put(winner, statistics.get(winner) == null ? 1 : statistics.get(winner) + 1);
         }
         if (episode % 1000 == 999) {
