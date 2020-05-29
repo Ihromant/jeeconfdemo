@@ -1,6 +1,7 @@
 package ua.ihromant.learning.agent;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -19,19 +20,14 @@ public class QLearningTemplate implements Agent {
 	private static final double RANDOM_GAMMA = 0.1;
     private static final double EXPLORATION = 0.1;
     private final QTable qTable;
-	private final State baseState;
-	private final int episodes;
-	private final Map<Player, Agent> players;
 
-	public QLearningTemplate(State baseState, QTable qTable, int episodes) {
-		this.baseState = baseState;
-		this.episodes = episodes;
+	public QLearningTemplate(QTable qTable) {
 		this.qTable = qTable;
-		this.players = Arrays.stream(Player.values()).collect(Collectors.toMap(Function.identity(), p -> this));
-		init();
 	}
 
-	private void init() {
+	@Override
+	public void train(State baseState, int episodes) {
+		Map<Player, Agent> players = Arrays.stream(Player.values()).collect(Collectors.toMap(Function.identity(), p -> this));
 		long time = System.currentTimeMillis();
 		for (int i = 0; i < episodes; i++) {
 			List<HistoryItem> history = Agent.play(players, baseState);
@@ -42,19 +38,27 @@ public class QLearningTemplate implements Agent {
 
 	private Map<State, Double> convert(List<HistoryItem> history) {
 		Map<State, Double> oldValues = qTable.getMultiple(history.stream().map(HistoryItem::getTo));
-		int last = history.size() - 1;
-		HistoryItem lastMove = history.get(last);
 		double factor = 1.0;
 		Map<State, Double> converted = new HashMap<>();
-		for (int i = last; i >= 0; i--) {
-			HistoryItem item = history.get(i);
-			double baseValue = lastMove.getTo().getUtility(item.getPlayer());
-			double oldValue = oldValues.get(item.getTo());
-			converted.put(item.getTo(), linear(oldValue, baseValue, factor));
-			double newFactor = item.isRandom() ? oldValue > baseValue ? RANDOM_GAMMA : 1.0 : GAMMA;
+		Collections.reverse(history);
+		HistoryItem lastMove = history.get(0);
+		for (HistoryItem item : history) {
+			double award = lastMove.getTo().getUtility(item.getPlayer());
+			double evaluation = oldValues.get(item.getTo());
+			double newFactor = getFactor(item.isRandom(), award, evaluation);
 			factor = factor * newFactor;
+			double newEvaluation = linear(evaluation, award, factor);
+			converted.put(item.getTo(), newEvaluation);
 		}
 		return converted;
+	}
+
+	private double getFactor(boolean random, double award, double evaluation) {
+		if (random && award < evaluation) {
+			return RANDOM_GAMMA;
+		}
+
+		return GAMMA;
 	}
 
 	private double linear(double oldValue, double newValue, double factor) {
@@ -68,8 +72,8 @@ public class QLearningTemplate implements Agent {
 			return new Decision(actions.get(ThreadLocalRandom.current().nextInt(actions.size())), !currentHistory.isEmpty());
 		}
 
-		Map<State, Double> rewards = qTable.getMultiple(state.getStates().distinct());
-		return new Decision(rewards.entrySet().stream()
+		Map<State, Double> evaluations = qTable.getMultiple(state.getStates().distinct());
+		return new Decision(evaluations.entrySet().stream()
 				.max(Comparator.comparingDouble(Map.Entry::getValue))
 				.orElseThrow(IllegalStateException::new).getKey());
 	}

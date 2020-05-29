@@ -3,9 +3,9 @@ package ua.ihromant.learning.state;
 import java.util.stream.Stream;
 
 public interface State {
-    Stream<Object> getActs();
+    Stream<Object> getActs(); // TODO remove
 
-    State apply(Object action);
+    State apply(Object action); // generally state and action are required
 
     boolean isTerminal();
 
@@ -13,7 +13,7 @@ public interface State {
 
     Player getCurrent();
 
-    double[] toModel();
+    double[] toModel(); // generally it should be moved to separate class
 
     default Stream<State> getStates() { return getActs().map(this::apply); }
 }

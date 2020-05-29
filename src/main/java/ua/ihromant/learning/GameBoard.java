@@ -6,21 +6,21 @@ import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 import ua.ihromant.learning.util.WriterUtil;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Supplier;
 
+// class responsible for place where human can play against AI
 public class GameBoard {
 	private final Agent ai;
-	private final Agent agent;
-	private final Supplier<State> baseStateProducer;
+	private final Agent human;
+	private final State baseState;
 
-	public GameBoard(Agent ai, Agent agent, Supplier<State> baseStateProducer) {
+	public GameBoard(Agent ai, Agent human, State baseState) {
 		this.ai = ai;
-		this.agent = agent;
-		this.baseStateProducer = baseStateProducer;
+		this.human = human;
+		this.baseState = baseState;
 	}
 
 	public void play() {
@@ -38,8 +38,15 @@ public class GameBoard {
 		} while (decision.equals("1") || decision.equals("2"));
 	}
 
+	private Map<Player, Agent> getPlayers(Player human) {
+		Map<Player, Agent> result = new HashMap<>();
+		result.put(human, this.human);
+		result.put(human.opponent(), this.ai);
+		return result;
+	}
+
 	public void play(Player player) {
-		List<HistoryItem> history = Agent.play(Map.of(player, agent, player.opponent(), ai), baseStateProducer.get());
+		List<HistoryItem> history = Agent.play(getPlayers(player), baseState);
 		WriterUtil.writeHistory(history);
 		switch ((int) history.get(history.size() - 1).getTo().getUtility(player)) {
 			case 0:

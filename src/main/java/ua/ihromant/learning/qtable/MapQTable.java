@@ -18,16 +18,17 @@ public class MapQTable implements QTable {
 
 	@Override
 	public Map<State, Double> getMultiple(Stream<State> actions) {
-		return actions.collect(Collectors.toMap(Function.identity(), act -> qStates.getOrDefault(act, 0.0)));
+		return actions.collect(Collectors.toMap(Function.identity(), act -> qStates.getOrDefault(act, 1.0)));
 	}
 
 	@Override
 	public void setMultiple(Map<State, Double> newValues) {
+		// TODO try this qStates.putAll(newValues);
 		newValues.forEach(this::apply);
 	}
 
 	private void apply(State action, double newValue) {
-		qStates.compute(action, (act, oldVal) -> {
+		qStates.compute(action, (act, oldVal) -> { // TODO try just put
 			oldVal = oldVal != null ? oldVal : newValue;
 			return (1 - alpha) * oldVal + alpha * newValue;
 		});

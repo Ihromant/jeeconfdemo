@@ -9,6 +9,10 @@ import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 
 public interface Agent {
+	default void train(State baseState, int episodes) {
+		System.out.println("Stub method for training");
+	}
+
 	Decision decision(State from, List<HistoryItem> currentHistory);
 
 	static List<HistoryItem> play(Map<Player, Agent> players, State baseState) {

@@ -1,5 +1,7 @@
 package ua.ihromant.learning.state;
 
+import ua.ihromant.learning.util.Converters;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -16,7 +18,7 @@ public class NimState implements State {
 	}
 
 	private NimState(int[] piles, Player player) {
-		this.piles = Arrays.stream(piles).sorted().filter(i -> i != 0).toArray();
+		this.piles = Arrays.stream(piles).filter(i -> i != 0).sorted().toArray();
 		this.current = player;
 	}
 
@@ -40,7 +42,7 @@ public class NimState implements State {
 	public State apply(Object act) {
 		NimAction action = (NimAction) act;
 		return new NimState(take(this.piles, action.getIdx(), action.getReduce()),
-						this.current == Player.X ? Player.O : Player.X);
+						this.current.opponent());
 	}
 
 	private static int[] take(int[] from, int idx, int reduce) {
@@ -70,14 +72,10 @@ public class NimState implements State {
 
 	@Override
 	public double[] toModel() {
-		double[] result = new double[PILES_MAX * BINARY_NUMBERS];
-		for (int i = 0; i < PILES_MAX && i < piles.length; i++) {
-			char[] binary = Integer.toBinaryString(piles[i]).toCharArray();
-			for (int j = 0; j < binary.length && j < BINARY_NUMBERS; j++) {
-				result[i * BINARY_NUMBERS + BINARY_NUMBERS - 1 - j] = binary[binary.length - 1 - j] - '0';
-			}
-		}
-		return result;
+		return Arrays.stream(piles)
+				.flatMap(i -> Arrays.stream(Converters.toBinary(i, BINARY_NUMBERS)))
+				.mapToDouble(Double::valueOf)
+				.toArray();
 	}
 
 	@Override

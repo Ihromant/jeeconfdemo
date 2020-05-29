@@ -45,4 +45,12 @@ public class Converters {
 
         return LOSE; // never, but in case of NAN etc.
     }
+
+    public static int[] toBinary(int from, int bitCount) {
+        int[] result = new int[bitCount];
+        for (int i = 0; i < bitCount; i++) {
+            result[bitCount - i - 1] = (from >> i) & 1;
+        }
+        return result;
+    }
 }
