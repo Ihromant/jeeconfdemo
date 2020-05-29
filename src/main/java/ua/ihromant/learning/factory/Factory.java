@@ -9,7 +9,6 @@ import ua.ihromant.learning.ai.QLearningTemplate;
 import ua.ihromant.learning.ai.qtable.NetworkQTable;
 import ua.ihromant.learning.ai.qtable.NeuralNetworkAgent;
 import ua.ihromant.learning.ai.qtable.NeuralNetworkConfig;
-import ua.ihromant.learning.ai.qtable.NeuralNetworkConverter;
 import ua.ihromant.learning.ai.qtable.QTable;
 import ua.ihromant.learning.state.State;
 
@@ -18,7 +17,7 @@ public interface Factory {
 
 	Agent player(Scanner scan);
 
-	int trainingEpisodes();
+	default int trainingEpisodes() { return 100000; }
 
 	default Agent createAI() {
 		return new QLearningTemplate(getStateSupplier().get(),
@@ -37,6 +36,6 @@ public interface Factory {
 	NeuralNetworkConfig networkConfig();
 
 	default GameBoard createBoard() {
-		return new GameBoard<>(createAI(), player(new Scanner(System.in)), getStateSupplier());
+		return new GameBoard(createAI(), player(new Scanner(System.in)), getStateSupplier());
 	}
 }

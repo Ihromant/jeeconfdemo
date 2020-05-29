@@ -29,17 +29,17 @@ public class NimLineState implements State {
 		return IntStream.rangeClosed(1, Arrays.stream(piles).max().orElse(0))
 				.boxed()
 				.flatMap(red -> {
-					int[] coeffsBigger = IntStream.range(0, piles.length)
+					int[] idxBigger = IntStream.range(0, piles.length)
 							.filter(i -> piles[i] >= red).toArray();
-					return Arrays.stream(coeffsBigger)
-							.mapToObj(coeff -> new NimAction(coeff, red));
+					return Arrays.stream(idxBigger)
+							.mapToObj(idx -> new NimAction(idx, red));
 				});
 	}
 
 	@Override
 	public State apply(Object act) {
 		NimAction action = (NimAction) act;
-		return new NimLineState(take(this.piles, action.getCoeffs()[0], action.getReduce()),
+		return new NimLineState(take(this.piles, action.getIdx(), action.getReduce()),
 						this.current == Player.X ? Player.O : Player.X);
 	}
 

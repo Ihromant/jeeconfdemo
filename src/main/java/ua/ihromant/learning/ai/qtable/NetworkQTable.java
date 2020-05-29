@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-import ua.ihromant.learning.state.NimLineState;
 import ua.ihromant.learning.state.State;
 
 public class NetworkQTable implements QTable {
@@ -24,10 +23,10 @@ public class NetworkQTable implements QTable {
 	public Map<State, Double> getMultiple(Stream<State> stream) {
 		List<State> stateActions = stream.collect(Collectors.toList());
 		INDArray input = Converters.convertToNDArray(stateActions, networkConfig.toModelConverter());
-		List<Double> evals = Converters.convertFromNDArray(agent.get(input), networkConfig.resultToQValueConverter());
+		List<Double> evaluated = Converters.convertFromNDArray(agent.get(input), networkConfig.resultToQValueConverter());
 		return IntStream.range(0, stateActions.size()).boxed()
 				.collect(Collectors.toMap(stateActions::get,
-						evals::get));
+						evaluated::get));
 	}
 
     @Override

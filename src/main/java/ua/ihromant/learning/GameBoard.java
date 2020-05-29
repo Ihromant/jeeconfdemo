@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
-public class GameBoard<A extends State> {
+public class GameBoard {
 	private final Agent ai;
 	private final Agent agent;
-	private final Supplier<A> baseStateProducer;
+	private final Supplier<State> baseStateProducer;
 
-	public GameBoard(Agent ai, Agent agent, Supplier<A> baseStateProducer) {
+	public GameBoard(Agent ai, Agent agent, Supplier<State> baseStateProducer) {
 		this.ai = ai;
 		this.agent = agent;
 		this.baseStateProducer = baseStateProducer;

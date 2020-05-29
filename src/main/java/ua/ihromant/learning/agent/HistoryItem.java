@@ -4,20 +4,14 @@ import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 
 public class HistoryItem {
-    private final State from;
     private final State to;
     private final Player player;
     private final boolean random;
 
-    public HistoryItem(State from, State to, Player player, boolean random) {
-        this.from = from;
+    public HistoryItem(State to, Player player, boolean random) {
         this.to = to;
         this.player = player;
         this.random = random;
-    }
-
-    public State getFrom() {
-        return from;
     }
 
     public Player getPlayer() {
@@ -26,10 +20,6 @@ public class HistoryItem {
 
     public State getTo() {
         return to;
-    }
-
-    public double getUtility() {
-        return to.getUtility(player);
     }
 
     public boolean isRandom() {

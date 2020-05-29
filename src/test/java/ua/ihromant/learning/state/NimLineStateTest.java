@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class NimLineStateTest {
-	private static final double[] standartModel =
+	private static final double[] standardModel =
 				   {0, 0, 1,
 					0, 1, 1,
 					1, 0, 1,
 					1, 1, 1};
 
-	private static final double[] nonStandartModel =
+	private static final double[] nonStandardModel =
 				   {0, 1, 0,
 					1, 0, 0,
 					1, 0, 1,

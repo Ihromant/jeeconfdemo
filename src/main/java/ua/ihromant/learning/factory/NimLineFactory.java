@@ -23,11 +23,6 @@ public class NimLineFactory implements Factory {
 	}
 
 	@Override
-	public int trainingEpisodes() {
-		return 100000;
-	}
-
-	@Override
 	public NeuralNetworkConfig networkConfig() {
 		return new NimNeuralNetworkConfig();
 	}

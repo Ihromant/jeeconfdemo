@@ -2,7 +2,6 @@ package ua.ihromant.learning.ai.qtable;
 
 import ua.ihromant.learning.state.State;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 

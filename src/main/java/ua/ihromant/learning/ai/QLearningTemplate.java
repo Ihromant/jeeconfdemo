@@ -62,23 +62,23 @@ public class QLearningTemplate implements Agent {
 
 	private Map<State, Double> convert(List<HistoryItem> history) {
 		Map<State, Double> oldValues = qTable.getMultiple(history.stream().map(HistoryItem::getTo));
-		int size = history.size();
-		HistoryItem lastMove = history.get(size - 1);
-		double coeff = 1.0;
+		int last = history.size() - 1;
+		HistoryItem lastMove = history.get(last);
+		double factor = 1.0;
 		Map<State, Double> converted = new HashMap<>();
-		for (int i = history.size() - 1; i >= 0; i--) {
+		for (int i = last; i >= 0; i--) {
 			HistoryItem item = history.get(i);
 			double baseValue = lastMove.getTo().getUtility(item.getPlayer());
 			double oldValue = oldValues.get(item.getTo());
-			converted.put(item.getTo(), linear(oldValue, baseValue, coeff));
+			converted.put(item.getTo(), linear(oldValue, baseValue, factor));
 			double newFactor = item.isRandom() ? oldValue > baseValue ? RANDOM_GAMMA : 1.0 : GAMMA;
-			coeff = coeff * newFactor;
+			factor = factor * newFactor;
 		}
 		return converted;
 	}
 
-	private double linear(double oldValue, double newValue, double coeff) {
-		return oldValue * (1 - coeff) + newValue * coeff;
+	private double linear(double oldValue, double newValue, double factor) {
+		return oldValue * (1 - factor) + newValue * factor;
 	}
 
 	@Override

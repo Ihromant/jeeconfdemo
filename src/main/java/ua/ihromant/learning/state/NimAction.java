@@ -1,20 +1,16 @@
 package ua.ihromant.learning.state;
 
 public class NimAction {
-    private final int[] coeffs;
+    private final int idx;
     private final int reduce;
 
-    public NimAction(int[] coeffs, int reduce) {
-        this.coeffs = coeffs;
+    public NimAction(int idx, int reduce) {
+        this.idx = idx;
         this.reduce = reduce;
     }
 
-    public NimAction(int coef, int reduce) {
-        this(new int[]{coef}, reduce);
-    }
-
-    public int[] getCoeffs() {
-        return coeffs;
+    public int getIdx() {
+        return idx;
     }
 
     public int getReduce() {

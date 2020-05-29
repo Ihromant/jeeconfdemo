@@ -6,7 +6,7 @@ import java.util.Scanner;
 import ua.ihromant.learning.state.State;
 
 public abstract class ConsolePlayer implements Agent {
-	private Scanner scan;
+	private final Scanner scan;
 
 	protected ConsolePlayer(Scanner scan) {
 		this.scan = scan;
