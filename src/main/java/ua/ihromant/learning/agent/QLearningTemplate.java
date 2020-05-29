@@ -36,24 +36,9 @@ public class QLearningTemplate implements Agent {
 	}
 
 	private void init() {
-		Map<Player, Integer> statistics = new EnumMap<>(Player.class);
-		int percentage = 0;
 		long time = System.currentTimeMillis();
-		long micro = time;
-		List<HistoryItem> history = new ArrayList<>();
 		for (int i = 0; i < episodes; i++) {
-			if (i % STEP == STEP - 1) {
-				System.out.println("Learning " + percentage++ + "% complete, elapsed: " + (System
-						.currentTimeMillis() - micro) + " ms, statistics: " + statistics);
-				WriterUtil.writeHistory(history, qTable);
-				statistics.clear();
-				micro = System.currentTimeMillis();
-			}
-			history = Agent.play(players, baseState);
-			Player winner = history.get(history.size() - 1).getTo().getUtility(Player.X) == 1.0 ? Player.X : Player.O;
-			if (history.stream().noneMatch(HistoryItem::isRandom)) {
-				statistics.put(winner, statistics.get(winner) == null ? 1 : statistics.get(winner) + 1);
-			}
+			List<HistoryItem> history = Agent.play(players, baseState);
 			qTable.setMultiple(convert(history));
 		}
 		System.out.println("Learning for " + episodes + " took " + (System.currentTimeMillis() - time) + " ms");
