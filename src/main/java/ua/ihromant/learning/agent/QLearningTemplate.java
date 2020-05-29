@@ -1,4 +1,4 @@
-package ua.ihromant.learning.ai;
+package ua.ihromant.learning.agent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import ua.ihromant.learning.agent.Agent;
-import ua.ihromant.learning.agent.HistoryItem;
-import ua.ihromant.learning.ai.qtable.QTable;
+import ua.ihromant.learning.state.HistoryItem;
+import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 import ua.ihromant.learning.util.WriterUtil;

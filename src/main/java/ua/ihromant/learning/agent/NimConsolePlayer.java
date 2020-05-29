@@ -5,8 +5,8 @@ import java.util.Scanner;
 import ua.ihromant.learning.state.NimAction;
 import ua.ihromant.learning.state.State;
 
-public class NimLinePlayer extends ConsolePlayer {
-	public NimLinePlayer(Scanner scan) {
+public class NimConsolePlayer extends ConsolePlayer {
+	public NimConsolePlayer(Scanner scan) {
 		super(scan);
 	}
 

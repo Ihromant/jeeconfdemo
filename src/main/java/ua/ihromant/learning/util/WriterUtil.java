@@ -1,7 +1,7 @@
 package ua.ihromant.learning.util;
 
-import ua.ihromant.learning.agent.HistoryItem;
-import ua.ihromant.learning.ai.qtable.QTable;
+import ua.ihromant.learning.state.HistoryItem;
+import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.State;
 
 import java.util.List;

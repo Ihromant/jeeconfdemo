@@ -1,4 +1,4 @@
-package ua.ihromant.learning.ai.qtable;
+package ua.ihromant.learning.qtable;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.nd4j.linalg.api.ndarray.INDArray;

@@ -5,17 +5,17 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class NimLineState implements State {
+public class NimState implements State {
 	public static final int PILES_MAX = 4;
 	public static final int BINARY_NUMBERS = 3;
 	private final int[] piles;
 	private final Player current;
 
-	public NimLineState(int[] piles) {
+	public NimState(int[] piles) {
 		this(piles, Player.X);
 	}
 
-	private NimLineState(int[] piles, Player player) {
+	private NimState(int[] piles, Player player) {
 		this.piles = Arrays.stream(piles).sorted().filter(i -> i != 0).toArray();
 		this.current = player;
 	}
@@ -39,7 +39,7 @@ public class NimLineState implements State {
 	@Override
 	public State apply(Object act) {
 		NimAction action = (NimAction) act;
-		return new NimLineState(take(this.piles, action.getIdx(), action.getReduce()),
+		return new NimState(take(this.piles, action.getIdx(), action.getReduce()),
 						this.current == Player.X ? Player.O : Player.X);
 	}
 
@@ -88,7 +88,7 @@ public class NimLineState implements State {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		NimLineState nimState = (NimLineState) o;
+		NimState nimState = (NimState) o;
 		return Arrays.equals(piles, nimState.piles) &&
 				current == nimState.current;
 	}

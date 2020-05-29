@@ -4,22 +4,26 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 import ua.ihromant.learning.agent.Agent;
-import ua.ihromant.learning.agent.NimLinePlayer;
-import ua.ihromant.learning.ai.qtable.NeuralNetworkConfig;
-import ua.ihromant.learning.ai.qtable.NimNeuralNetworkConfig;
-import ua.ihromant.learning.state.NimLineState;
+import ua.ihromant.learning.agent.NimConsolePlayer;
+import ua.ihromant.learning.qtable.NeuralNetworkConfig;
+import ua.ihromant.learning.state.NimState;
 import ua.ihromant.learning.state.State;
 
-public class NimLineFactory implements Factory {
-	private static final int[] base = {1, 3, 5, 7};
+public class NimFactory implements Factory {
+	private static final int[] NIM_GAME = {1, 3, 5, 7};
 	@Override
 	public Supplier<State> getStateSupplier() {
-		return () -> new NimLineState(base);
+		return () -> new NimState(NIM_GAME);
 	}
 
 	@Override
 	public Agent player(Scanner scan) {
-		return new NimLinePlayer(scan);
+		return new NimConsolePlayer(scan);
+	}
+
+	@Override
+	public int trainingEpisodes() {
+		return 100000;
 	}
 
 	@Override

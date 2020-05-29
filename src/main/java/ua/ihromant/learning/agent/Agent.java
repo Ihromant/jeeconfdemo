@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 

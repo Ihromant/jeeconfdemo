@@ -1,4 +1,4 @@
-package ua.ihromant.learning.ai.qtable;
+package ua.ihromant.learning.qtable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import ua.ihromant.learning.state.State;
+import ua.ihromant.learning.util.Converters;
 
 public class NetworkQTable implements QTable {
     private final NeuralNetworkAgent agent;

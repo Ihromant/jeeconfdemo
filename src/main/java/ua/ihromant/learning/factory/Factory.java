@@ -5,11 +5,11 @@ import java.util.function.Supplier;
 
 import ua.ihromant.learning.GameBoard;
 import ua.ihromant.learning.agent.Agent;
-import ua.ihromant.learning.ai.QLearningTemplate;
-import ua.ihromant.learning.ai.qtable.NetworkQTable;
-import ua.ihromant.learning.ai.qtable.NeuralNetworkAgent;
-import ua.ihromant.learning.ai.qtable.NeuralNetworkConfig;
-import ua.ihromant.learning.ai.qtable.QTable;
+import ua.ihromant.learning.agent.QLearningTemplate;
+import ua.ihromant.learning.qtable.NetworkQTable;
+import ua.ihromant.learning.qtable.NeuralNetworkAgent;
+import ua.ihromant.learning.qtable.NeuralNetworkConfig;
+import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.State;
 
 public interface Factory {
@@ -17,14 +17,14 @@ public interface Factory {
 
 	Agent player(Scanner scan);
 
-	default int trainingEpisodes() { return 100000; }
+	int trainingEpisodes();
 
-	default Agent createAI() {
+	private Agent createAI() {
 		return new QLearningTemplate(getStateSupplier().get(),
 				createQTable(), trainingEpisodes());
 	}
 
-	default QTable createQTable() {
+	private QTable createQTable() {
 		NeuralNetworkConfig config = networkConfig();
 		return new NetworkQTable(config, new NeuralNetworkAgent(config));
 	}

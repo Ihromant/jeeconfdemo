@@ -1,4 +1,4 @@
-package ua.ihromant.learning.agent;
+package ua.ihromant.learning.state;
 
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;

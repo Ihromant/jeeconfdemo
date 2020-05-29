@@ -1,4 +1,4 @@
-package ua.ihromant.learning.ai.qtable;
+package ua.ihromant.learning.qtable;
 
 import ua.ihromant.learning.state.State;
 

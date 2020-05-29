@@ -1,7 +1,6 @@
-package ua.ihromant.learning.ai;
+package ua.ihromant.learning.agent;
 
-import ua.ihromant.learning.agent.Agent;
-import ua.ihromant.learning.agent.HistoryItem;
+import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 

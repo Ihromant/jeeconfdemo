@@ -3,6 +3,7 @@ package ua.ihromant.learning.agent;
 import java.util.List;
 import java.util.Scanner;
 
+import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.state.State;
 
 public abstract class ConsolePlayer implements Agent {
