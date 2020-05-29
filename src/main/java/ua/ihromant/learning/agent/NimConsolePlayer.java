@@ -13,12 +13,11 @@ public class NimConsolePlayer extends ConsolePlayer {
 	@Override
 	protected void explanation(State state) {
 		System.out.println(state.toString());
-		System.out.println("Enter your move, firstly number to take, then index (starting from 0)");
+		System.out.println("Enter your move, firstly index (starting from 0), then number to take");
 	}
 
 	@Override
 	protected Object getAction(Scanner scan) {
-		int toTake = Integer.parseInt(scan.nextLine());
-		return new NimAction(Integer.parseInt(scan.nextLine()), toTake);
+		return new NimAction(Integer.parseInt(scan.nextLine()), Integer.parseInt(scan.nextLine()));
 	}
 }
