@@ -7,7 +7,7 @@ import ua.ihromant.learning.state.State;
 import java.util.Comparator;
 import java.util.List;
 
-public final class MinimaxTemplate<A> implements Agent {
+public final class MinimaxTemplate implements Agent {
     private final Player player;
     public MinimaxTemplate(Player player) {
         this.player = player;
