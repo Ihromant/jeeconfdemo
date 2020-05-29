@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
+import ua.ihromant.learning.network.NeuralNetworkConfig;
+import ua.ihromant.learning.network.NeuralNetworkAgent;
 import ua.ihromant.learning.state.State;
 import ua.ihromant.learning.util.Converters;
 

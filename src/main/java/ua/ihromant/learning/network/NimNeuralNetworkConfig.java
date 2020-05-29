@@ -1,4 +1,4 @@
-package ua.ihromant.learning.factory;
+package ua.ihromant.learning.network;
 
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -9,7 +9,6 @@ import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
-import ua.ihromant.learning.qtable.NeuralNetworkConfig;
 import ua.ihromant.learning.state.NimState;
 import ua.ihromant.learning.state.State;
 import ua.ihromant.learning.util.Converters;

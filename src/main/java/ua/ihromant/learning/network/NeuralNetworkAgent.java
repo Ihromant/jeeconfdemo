@@ -1,4 +1,4 @@
-package ua.ihromant.learning.qtable;
+package ua.ihromant.learning.network;
 
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;

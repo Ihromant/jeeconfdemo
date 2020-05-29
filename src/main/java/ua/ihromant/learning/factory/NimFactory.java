@@ -5,7 +5,8 @@ import java.util.function.Supplier;
 
 import ua.ihromant.learning.agent.Agent;
 import ua.ihromant.learning.agent.NimConsolePlayer;
-import ua.ihromant.learning.qtable.NeuralNetworkConfig;
+import ua.ihromant.learning.network.NeuralNetworkConfig;
+import ua.ihromant.learning.network.NimNeuralNetworkConfig;
 import ua.ihromant.learning.state.NimState;
 import ua.ihromant.learning.state.State;
 

@@ -6,9 +6,9 @@ import java.util.function.Supplier;
 import ua.ihromant.learning.GameBoard;
 import ua.ihromant.learning.agent.Agent;
 import ua.ihromant.learning.agent.QLearningTemplate;
+import ua.ihromant.learning.network.NeuralNetworkConfig;
 import ua.ihromant.learning.qtable.NetworkQTable;
-import ua.ihromant.learning.qtable.NeuralNetworkAgent;
-import ua.ihromant.learning.qtable.NeuralNetworkConfig;
+import ua.ihromant.learning.network.NeuralNetworkAgent;
 import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.State;
 
