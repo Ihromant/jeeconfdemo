@@ -43,13 +43,10 @@ public class GameBoard {
 		WriterUtil.writeHistory(history);
 		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.X)) {
 			case 0:
-				System.out.println("Draw!");
+				System.out.println("Computer won!");
 				break;
 			case 1:
 				System.out.println("You won!");
-				break;
-			case -1:
-				System.out.println("Computer won!");
 				break;
 		}
 	}
@@ -59,13 +56,11 @@ public class GameBoard {
 		WriterUtil.writeHistory(history);
 		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.O)) {
 			case 0:
-				System.out.println("Draw!");
+				System.out.println("computer won!");
 				return;
 			case 1:
 				System.out.println("You won!");
 				return;
-			case -1:
-				System.out.println("Computer won!");
 		}
 	}
 }
