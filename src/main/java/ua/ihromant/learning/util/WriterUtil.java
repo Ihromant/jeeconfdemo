@@ -30,4 +30,17 @@ public class WriterUtil {
         }
         System.out.println();
     }
+
+    public static void writeHistory(List<HistoryItem> history) {
+        List<String[]> lines = history.stream()
+                .map(h -> h.getTo().toString())
+                .map(s -> s.split("\n")).collect(Collectors.toList());
+        for (int i = 0; i < lines.get(0).length; i++) {
+            for (int j = 0; j < history.size(); j++) {
+                System.out.print(lines.get(j)[i] + "  ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }

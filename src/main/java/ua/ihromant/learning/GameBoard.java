@@ -1,10 +1,14 @@
 package ua.ihromant.learning;
 
 import ua.ihromant.learning.agent.Agent;
+import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
+import ua.ihromant.learning.util.WriterUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
@@ -35,17 +39,9 @@ public class GameBoard {
 	}
 
 	public void playFirst() {
-		State state = baseStateProducer.get();
-		while (!state.isTerminal()) {
-			state = agent.decision(state, new ArrayList<>()).action; // TODO
-			if (state.isTerminal()) {
-				break;
-			}
-			System.out.println(state.toString());
-			state = ai.decision(state, new ArrayList<>()).action; // TODO
-		}
-		System.out.println(state);
-		switch ((int) state.getUtility(Player.X)) {
+		List<HistoryItem> history = Agent.play(Map.of(Player.X, agent, Player.O, ai), baseStateProducer.get());
+		WriterUtil.writeHistory(history);
+		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.X)) {
 			case 0:
 				System.out.println("Draw!");
 				break;
@@ -59,17 +55,9 @@ public class GameBoard {
 	}
 
 	public void playSecond() {
-		State state = baseStateProducer.get();
-		while (!state.isTerminal()) {
-			state = ai.decision(state, new ArrayList<>()).action; // TODO
-			if (state.isTerminal()) {
-				break;
-			}
-			state = agent.decision(state, new ArrayList<>()).action; // TODO
-			System.out.println(state.toString());
-		}
-		System.out.println(state);
-		switch ((int) state.getUtility(Player.O)) {
+		List<HistoryItem> history = Agent.play(Map.of(Player.X, ai, Player.O, agent), baseStateProducer.get());
+		WriterUtil.writeHistory(history);
+		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.O)) {
 			case 0:
 				System.out.println("Draw!");
 				return;
