@@ -30,37 +30,24 @@ public class GameBoard {
 			System.out.println("Write whether you move first or second. Other values will exit the game");
 			decision = scan.nextLine();
 			if (decision.equals("1")) {
-				playFirst();
+				play(Player.X);
 			}
 			if (decision.equals("2")) {
-				playSecond();
+				play(Player.O);
 			}
 		} while (decision.equals("1") || decision.equals("2"));
 	}
 
-	public void playFirst() {
-		List<HistoryItem> history = Agent.play(Map.of(Player.X, agent, Player.O, ai), baseStateProducer.get());
+	public void play(Player player) {
+		List<HistoryItem> history = Agent.play(Map.of(player, agent, player.opponent(), ai), baseStateProducer.get());
 		WriterUtil.writeHistory(history);
-		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.X)) {
+		switch ((int) history.get(history.size() - 1).getTo().getUtility(player)) {
 			case 0:
 				System.out.println("Computer won!");
 				break;
 			case 1:
 				System.out.println("You won!");
 				break;
-		}
-	}
-
-	public void playSecond() {
-		List<HistoryItem> history = Agent.play(Map.of(Player.X, ai, Player.O, agent), baseStateProducer.get());
-		WriterUtil.writeHistory(history);
-		switch ((int) history.get(history.size() - 1).getTo().getUtility(Player.O)) {
-			case 0:
-				System.out.println("computer won!");
-				return;
-			case 1:
-				System.out.println("You won!");
-				return;
 		}
 	}
 }
