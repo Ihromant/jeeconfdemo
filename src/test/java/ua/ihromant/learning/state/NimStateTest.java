@@ -32,4 +32,14 @@ public class NimStateTest {
 		state = new NimState(new int[] {2, 4, 5, 6});
 		Assertions.assertArrayEquals(state.toModel(), nonStandardModel);
 	}
+
+	@Test
+	public void testApply() {
+		State state = new NimState(new int[] {1, 2, 3, 4});
+		state = state.apply(new NimAction(3, 4));
+		state = state.apply(new NimAction(2, 3));
+		state = state.apply(new NimAction(0, 1));
+		state = state.apply(new NimAction(0, 2));
+		Assertions.assertTrue(state.isTerminal());
+	}
 }

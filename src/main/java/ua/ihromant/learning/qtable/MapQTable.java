@@ -4,7 +4,6 @@ import ua.ihromant.learning.state.State;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,13 +27,10 @@ public class MapQTable implements QTable {
 	}
 
 	private void apply(State action, double newValue) {
-		qStates.compute(action, getStateDoubleDoubleBiFunction(newValue));
-	}
-
-	private BiFunction<State, Double, Double> getStateDoubleDoubleBiFunction(double newValue) {
-		return (act, oldVal) -> {
+		qStates.compute(action, (act, oldVal) -> {
 			oldVal = oldVal != null ? oldVal : newValue;
 			return (1 - alpha) * oldVal + alpha * newValue;
-		};
+		});
 	}
+
 }

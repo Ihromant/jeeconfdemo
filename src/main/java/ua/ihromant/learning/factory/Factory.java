@@ -19,12 +19,12 @@ public interface Factory {
 
 	int trainingEpisodes();
 
-	private Agent createAI() {
+	default Agent createAI() {
 		return new QLearningTemplate(getStateSupplier().get(),
 				createQTable(), trainingEpisodes());
 	}
 
-	private QTable createQTable() {
+	default QTable createQTable() {
 		NeuralNetworkConfig config = networkConfig();
 		return new NetworkQTable(config, new NeuralNetworkAgent(config));
 	}
