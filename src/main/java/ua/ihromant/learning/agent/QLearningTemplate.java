@@ -1,9 +1,7 @@
 package ua.ihromant.learning.agent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +13,8 @@ import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
-import ua.ihromant.learning.util.WriterUtil;
 
 public class QLearningTemplate implements Agent {
-	private static final int STEP = 1000;
     private static final double GAMMA = 0.8;
 	private static final double RANDOM_GAMMA = 0.1;
     private static final double EXPLORATION = 0.1;
