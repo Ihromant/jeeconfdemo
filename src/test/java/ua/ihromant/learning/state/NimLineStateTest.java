@@ -28,8 +28,8 @@ public class NimLineStateTest {
 	@Test
 	public void testToModel() {
 		NimLineState state = new NimLineState(new int[] {1, 3, 5, 7});
-		Assertions.assertArrayEquals(state.toModel(), standartModel);
+		Assertions.assertArrayEquals(state.toModel(), standardModel);
 		state = new NimLineState(new int[] {2, 4, 5, 6});
-		Assertions.assertArrayEquals(state.toModel(), nonStandartModel);
+		Assertions.assertArrayEquals(state.toModel(), nonStandardModel);
 	}
 }
