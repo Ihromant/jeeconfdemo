@@ -14,6 +14,7 @@ import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.qtable.QTable;
 import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
+import ua.ihromant.learning.util.WriterUtil;
 
 public class QLearningTemplate implements Agent {
     private static final double GAMMA = 0.8;
@@ -31,6 +32,7 @@ public class QLearningTemplate implements Agent {
 		long time = System.currentTimeMillis();
 		for (int i = 0; i < episodes; i++) {
 			List<HistoryItem> history = Agent.play(players, baseState);
+			WriterUtil.writeHistory(history, qTable, i);
 			qTable.setMultiple(convert(history));
 		}
 		System.out.println("Learning for " + episodes + " took " + (System.currentTimeMillis() - time) + " ms");
@@ -72,7 +74,7 @@ public class QLearningTemplate implements Agent {
 			return new Decision(actions.get(ThreadLocalRandom.current().nextInt(actions.size())), !currentHistory.isEmpty());
 		}
 
-		Map<State, Double> evaluations = qTable.getMultiple(state.getStates().distinct());
+		Map<State, Double> evaluations = qTable.getMultiple(state.getStates());
 		return new Decision(evaluations.entrySet().stream()
 				.max(Comparator.comparingDouble(Map.Entry::getValue))
 				.orElseThrow(IllegalStateException::new).getKey());

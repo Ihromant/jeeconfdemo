@@ -2,14 +2,29 @@ package ua.ihromant.learning.util;
 
 import ua.ihromant.learning.state.HistoryItem;
 import ua.ihromant.learning.qtable.QTable;
+import ua.ihromant.learning.state.Player;
 import ua.ihromant.learning.state.State;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class WriterUtil {
-    public static <A> void writeHistory(List<HistoryItem> history, QTable qTable) {
+    private static final Map<Player, Integer> statistics = new EnumMap<>(Player.class);
+
+    public static void writeHistory(List<HistoryItem> history, QTable qTable, int episode) {
+        if (history.stream().noneMatch(HistoryItem::isRandom)) {
+            Player winner = history.get(history.size() - 1).getTo().getUtility(Player.X) == 1.0 ? Player.X : Player.O;
+            statistics.put(winner, statistics.get(winner) == null ? 1 : statistics.get(winner) + 1);
+        }
+        if (episode % 1000 == 999) {
+            System.out.println("Statistics: for " + (episode + 1) + " episode: " + statistics);
+            writeHistory(history, qTable);
+            statistics.clear();
+        }
+    }
+    public static void writeHistory(List<HistoryItem> history, QTable qTable) {
         List<String[]> lines = history.stream()
                 .map(h -> h.getTo().toString())
                 .map(s -> s.split("\n")).collect(Collectors.toList());
