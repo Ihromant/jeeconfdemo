@@ -1,8 +1,5 @@
 package ua.ihromant.learning.state;
 
-import ua.ihromant.learning.state.Player;
-import ua.ihromant.learning.state.State;
-
 public class HistoryItem {
     private final State to;
     private final Player player;
