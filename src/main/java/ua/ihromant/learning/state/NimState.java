@@ -74,7 +74,7 @@ public class NimState implements State {
 	public double[] toModel() {
 		return Arrays.stream(piles)
 				.flatMap(i -> Arrays.stream(Converters.toBinary(i, BINARY_NUMBERS)))
-				.mapToDouble(Double::valueOf)
+				.mapToDouble(i -> (double) i)
 				.toArray();
 	}
 

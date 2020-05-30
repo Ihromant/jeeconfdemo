@@ -27,6 +27,7 @@ public class WriterUtil {
             statistics.clear();
         }
     }
+
     public static void writeHistory(List<HistoryItem> history, QTable qTable) {
         List<String[]> lines = history.stream()
                 .map(h -> h.getTo().toString())

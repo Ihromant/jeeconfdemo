@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 public interface State {
     Stream<Object> getActs(); // TODO remove
 
-    State apply(Object action); // generally state and action are required
+    State apply(Object action); // generally state and action pair is required
 
     boolean isTerminal();
 

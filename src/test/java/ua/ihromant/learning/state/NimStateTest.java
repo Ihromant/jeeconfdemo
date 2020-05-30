@@ -19,10 +19,10 @@ public class NimStateTest {
 	@Test
 	public void testActions() {
 		NimState state = new NimState(new int[] {1, 2, 2});
-		Assertions.assertEquals(5, state.getActs().count());
+		Assertions.assertEquals(5, state.getStates().count());
 
 		state = new NimState(new int[] {1, 3, 5, 7});
-		Assertions.assertEquals(16, state.getActs().count());
+		Assertions.assertEquals(16, state.getStates().count());
 	}
 
 	@Test
