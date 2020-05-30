@@ -100,9 +100,6 @@ public class NimState implements State {
 
 	@Override
 	public String toString() {
-		return "NimState{" +
-				"piles=" + Arrays.toString(piles) +
-				", current=" + current +
-				'}';
+		return current + ":" + Arrays.toString(piles);
 	}
 }
